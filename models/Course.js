@@ -20,20 +20,19 @@ const CourseSchema = new Schema({
   slug: {
     type: String,
     unique: true,
-
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref : 'Category'
-  }
+    ref: 'Category',
+  },
 });
 
-CourseSchema.pre('validate', function(next) {
+CourseSchema.pre('validate', function (next) {
   this.slug = slugify(this.name, {
-    lower : true,
-    strict : true,
-  })
+    lower: true,
+    strict: true,
+  });
   next();
-})
-const Course = mongoose.model('Course' , CourseSchema);
+});
+const Course = mongoose.model('Course', CourseSchema);
 module.exports = Course;
