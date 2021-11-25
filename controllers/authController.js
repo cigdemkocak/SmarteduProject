@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Category = require('../models/Category');
-
+const Course = require('../models/Course');
 
 exports.createUser = async (req, res) => {
   try {
@@ -16,7 +16,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.loginUser =  (req, res) => {
+exports.loginUser = (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -39,19 +39,20 @@ exports.loginUser =  (req, res) => {
   }
 };
 
-
 exports.logoutUser = (req, res) => {
-  req.session.destroy(()=> {
+  req.session.destroy(() => {
     res.redirect('/');
-  })
-}
+  });
+};
 
 exports.getDashboardPage = async (req, res) => {
-  const user = await User.findOne({_id:req.session.userID})
+  const user = await User.findOne({ _id: req.session.userID });
   const categories = await Category.find();
+  const courses = await Course.find({user:req.session.userID})
   res.status(200).render('dashboard', {
     page_name: 'dashboard',
     user,
-    categories
+    categories,
+    courses,
   });
-}; 
+};
