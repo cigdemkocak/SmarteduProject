@@ -12,7 +12,7 @@ const userRoute = require('./routes/userRoute');
 const app = express();
 
 //Connect DB
-mongoose.connect('mongodb://localhost/smartedu-db' , {
+mongoose.connect('mongodb+srv://dbUser:29061997@cluster0.wrfxd.mongodb.net/smartedu-db?retryWrites=true&w=majority' , {
   useNewUrlParser : true,
   useUnifiedTopology : true,
   //useFindAndModify : false,
