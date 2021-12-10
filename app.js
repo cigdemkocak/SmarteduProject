@@ -36,7 +36,7 @@ app.use(session({
   secret: 'my_keyboard_cat',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/smartedu-db' })
+  store: MongoStore.create({ mongoUrl: 'mongodb+srv://dbUser:29061997@cluster0.wrfxd.mongodb.net/smartedu-db?retryWrites=true&w=majority' })
 }));
 app.use(flash());
 app.use((req, res, next)=> {
@@ -59,7 +59,7 @@ app.use('/users', userRoute );
 
 
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`App started on port ${port}`);
 });
